@@ -1,8 +1,15 @@
+
+
+
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+
+
 public class Main {
     public static void main(String[] args) {
+    	
+    	
         String filePath = "randomNumbers.txt"; 
         int count = 3000;
         Generador.generateNumbers(filePath, count);
@@ -20,6 +27,7 @@ public class Main {
         GnomeSort.gnomeSort(numbers); 
         for (int number : numbers) {
             System.out.println(number);
+            
         }
     }
 }
