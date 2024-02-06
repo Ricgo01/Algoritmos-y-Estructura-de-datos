@@ -1,6 +1,3 @@
-
-
-
 public class GnomeSort {
     public static void gnomeSort(int[] arr) {
         int index = 0;

@@ -31,13 +31,14 @@ public class Main {
             System.out.println(number);
             
         }
-        
+        System.out.println("Se han ordenado los números con GnomeSort");
         
         MergeSort.mergeSort(numbers);
         for (int number : numbers) {
             System.out.println(number);
             
         }
+        System.out.println("Se han ordenado los números con MergeSort");
     }
 }
     
