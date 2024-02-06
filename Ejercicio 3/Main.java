@@ -46,6 +46,13 @@ public class Main {
             
         }
         System.out.println("Se han ordenado los números con QuickSort");
+        
+        RadixSort.radixSort(numbers, count);
+        for (int number : numbers) {
+            System.out.println(number);
+            
+        }
+        System.out.println("Se han ordenado los números con RadixSort");
     }
 }
     
