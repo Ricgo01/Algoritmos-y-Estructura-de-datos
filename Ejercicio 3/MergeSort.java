@@ -46,7 +46,6 @@ public class MergeSort {
                 arr[k++] = right[j++];
             }
         }
-
  
         while (i < left.length) {
             arr[k++] = left[i++];
@@ -57,10 +56,4 @@ public class MergeSort {
         }
     }
 
-    private static void printArray(int[] arr) {
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-    }
 }
