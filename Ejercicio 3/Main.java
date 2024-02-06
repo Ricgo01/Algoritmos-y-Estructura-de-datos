@@ -39,6 +39,13 @@ public class Main {
             
         }
         System.out.println("Se han ordenado los números con MergeSort");
+
+        QuickSort.quickSort(numbers, 0, numbers.length - 1);
+        for (int number : numbers) {
+            System.out.println(number);
+            
+        }
+        System.out.println("Se han ordenado los números con QuickSort");
     }
 }
     
