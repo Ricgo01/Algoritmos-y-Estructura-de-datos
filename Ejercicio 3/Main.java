@@ -42,6 +42,9 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
+       
+        
+        
 
         while (condition) {
             System.out.println("1. Gnome Sort");
@@ -53,37 +56,56 @@ public class Main {
 
             switch (lector.nextInt()) { 
             case 1: 
-                for(int i = 0; i < 100; i++) {
+                for(int i = 11; i < numbers.length; i++) {
+                	int[] arr0 = numbers.clone();
                     GnomeSort.gnomeSort(numbers);
-                    shuffleArray(numbers);
+                    for(int j = 0; j< arr0.length; j++) {
+                    	System.out.println(arr0[j] + "");
+                    }
+       
                 }
                 break;
 
             case 2: 
-                for(int i = 0; i < 100; i++) {
+                for(int i = 11; i < numbers.length; i++) {
+                	int[] arr1 = numbers.clone();
                     MergeSort.mergeSort(numbers);
-                    shuffleArray(numbers);
+                    for(int j = 0; j< arr1.length; j++) {
+                    	System.out.println(arr1[j] + "");
+                    }
                 }
                 break;
 
             case 3:
-                for(int i = 0; i < 100; i++) {
+                for(int i = 11 ; i < numbers.length; i++) {
+                	int[] arr2 = numbers.clone();
                     QuickSort.quickSort(numbers, 0, numbers.length - 1);
-                    shuffleArray(numbers);
+                    for(int j = 0; j< arr2.length; j++) {
+                    	System.out.println(arr2[j] + "");
+                    }
+                    //shuffleArray(numbers);
                 }
                 break;
 
             case 4:
-                for(int i = 0; i < 100; i++) {
+                for(int i = 11; i < numbers.length; i++) {
+                	int[] arr3 = numbers.clone();
                     RadixSort.radixSort(numbers, count);
-                    shuffleArray(numbers);
+                    for(int j = 0; j< arr3.length; j++) {
+                    	System.out.println(arr3[j] + "");
+                    }
+                    //shuffleArray(numbers);
                 }
                 break;
 
             case 5:
-                for(int i = 0; i < 100; i++) {
+                for(int i = 11; i < numbers.length; i++) {
+                	int[] arr4 = numbers.clone();
                     InsertionSort.insertionSort(numbers);
-                    shuffleArray(numbers);
+                    for(int j = 0; j< arr4.length; j++) {
+                    	System.out.println(arr4[j] + "");
+                    }
+                   // shuffleArray(numbers);
                 }
                 break;
             }
@@ -94,6 +116,7 @@ public class Main {
             }
             else if (lector.nextInt() == 1) {
                 condition = true;
+                shuffleArray(numbers);
             }
             else if (lector.nextInt() == 3) {
                 for (int i = 0; i < count; i++) {
