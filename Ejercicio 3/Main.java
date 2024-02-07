@@ -68,6 +68,12 @@ public class Main {
             
         }
         System.out.println("Se han ordenado los números con RadixSort");
+
+        InsertionSort.insertionSort(numbers);
+        for (int number : numbers) {
+            System.out.println(number);
+        }
+        System.out.println("Se han ordenado los números con InsertionSort");
     }
 }
     
