@@ -16,6 +16,7 @@
 
 
 
+import java.util.Random;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,8 +25,11 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) {
     	
-    	
+    	Scanner lector = new Scanner(System.in);
         String filePath = "randomNumbers.txt"; 
+        boolean condition = true;
+
+        // for count = 11 to 300
         int count = 3000;
         Generador.generateNumbers(filePath, count);
         System.out.println("Se han generado " + count + " números aleatorios en el archivo " + filePath);
@@ -38,42 +42,77 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
-        
-        
-        
-        GnomeSort.gnomeSort(numbers); 
-        for (int number : numbers) {
-            System.out.println(number);
-            
-        }
-        System.out.println("Se han ordenado los números con GnomeSort");
-        
-        MergeSort.mergeSort(numbers);
-        for (int number : numbers) {
-            System.out.println(number);
-            
-        }
-        System.out.println("Se han ordenado los números con MergeSort");
 
-        QuickSort.quickSort(numbers, 0, numbers.length - 1);
-        for (int number : numbers) {
-            System.out.println(number);
-            
-        }
-        System.out.println("Se han ordenado los números con QuickSort");
-        
-        RadixSort.radixSort(numbers, count);
-        for (int number : numbers) {
-            System.out.println(number);
-            
-        }
-        System.out.println("Se han ordenado los números con RadixSort");
+        while (condition) {
+            System.out.println("1. Gnome Sort");
+            System.out.println("2. Merge Sort");
+            System.out.println("3. Quick Sort");
+            System.out.println("4. Radix Sort");
+            System.out.println("5. Insertion Sort");
+            System.out.println("Seleccione el algoritmo de ordenamiento que desea utilizar: ");
 
-        InsertionSort.insertionSort(numbers);
-        for (int number : numbers) {
-            System.out.println(number);
+            switch (lector.nextInt()) { 
+            case 1: 
+                for(int i = 0; i < 100; i++) {
+                    GnomeSort.gnomeSort(numbers);
+                    shuffleArray(numbers);
+                }
+                break;
+
+            case 2: 
+                for(int i = 0; i < 100; i++) {
+                    MergeSort.mergeSort(numbers);
+                    shuffleArray(numbers);
+                }
+                break;
+
+            case 3:
+                for(int i = 0; i < 100; i++) {
+                    QuickSort.quickSort(numbers, 0, numbers.length - 1);
+                    shuffleArray(numbers);
+                }
+                break;
+
+            case 4:
+                for(int i = 0; i < 100; i++) {
+                    RadixSort.radixSort(numbers, count);
+                    shuffleArray(numbers);
+                }
+                break;
+
+            case 5:
+                for(int i = 0; i < 100; i++) {
+                    InsertionSort.insertionSort(numbers);
+                    shuffleArray(numbers);
+                }
+                break;
+            }
+
+            System.out.println("Desea continuar? (1. Si, 2. No, 3. Imprimir números)");
+            if (lector.nextInt() == 2) {
+                condition = false;
+            }
+            else if (lector.nextInt() == 1) {
+                condition = true;
+            }
+            else if (lector.nextInt() == 3) {
+                for (int i = 0; i < count; i++) {
+                    System.out.println(numbers[i]);
+                }
+            }
         }
-        System.out.println("Se han ordenado los números con InsertionSort");
+        lector.close();
+    }
+
+    private static void shuffleArray(int[] array) {
+        Random rand = new Random();
+        for (int i = array.length - 1; i > 0; i--) {
+            int index = rand.nextInt(i + 1);
+            // Intercambio simple
+            int a = array[index];
+            array[index] = array[i];
+            array[i] = a;
+        }
     }
 }
     
