@@ -4,7 +4,7 @@
  * Facultad de Ingenieria
  * Departamento de Ciencias de la Computacion
  * Fecha inicio: 28/01/2024
- * Fecha final: 06/02/2024
+ * Fecha final: 07/02/2024
  *
  * @author Vianka Castro 23201
  * 		   Ricardo Godinez 23247
@@ -20,16 +20,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Main {
+
+    /**
+     * Punto de entrada principal del programa. Ejecuta el proceso de comparación
+     * de algoritmos de ordenamiento.
+     *
+     * @param args Argumentos de línea de comando. No se utilizan en este programa.
+     */
     public static void main(String[] args) {
         Scanner lector = new Scanner(System.in);
         String filePath = "randomNumbers.txt";
-        int count = 3000; // Número total de números
+        int count = 3000;
 
-        // Generación de números aleatorios
+        // Genera números aleatorios y los guarda en un archivo.
         Generador.generateNumbers(filePath, count);
         System.out.println("Se han generado " + count + " números aleatorios en el archivo " + filePath);
 
-        // Lectura de números desde el archivo
         int[] numbers = new int[count];
         try (Scanner scanner = new Scanner(new File(filePath))) {
             for (int i = 0; i < count; i++) {
@@ -37,7 +43,8 @@ public class Main {
             }
         } catch (FileNotFoundException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
-            return; // Salir si no se encuentra el archivo
+            return;
+
         }
 
         while (true) {
@@ -51,11 +58,10 @@ public class Main {
             int option = lector.nextInt();
             for (int subArraySize = 11; subArraySize <= count; subArraySize++) {
                 int[] subArray = new int[subArraySize];
-                System.arraycopy(numbers, 0, subArray, 0, subArraySize); // Copiar subconjunto del arreglo original
+                System.arraycopy(numbers, 0, subArray, 0, subArraySize);
 
                 long startTime = System.nanoTime();
                 
-                // Ejecutar el algoritmo seleccionado
                 switch (option) {
                     case 1:
                         GnomeSort.gnomeSort(subArray);
@@ -74,7 +80,7 @@ public class Main {
                         break;
                     default:
                         System.out.println("Opción no válida.");
-                        break; // Salir del for loop si la opción no es válida
+                        break;
                 }
 
                 long endTime = System.nanoTime();
@@ -85,7 +91,7 @@ public class Main {
             System.out.println("Desea probar otro algoritmo? (1. Si, 2. No)");
             int decision = lector.nextInt();
             if (decision != 1) {
-                break; // Salir del bucle si el usuario no desea continuar
+                break;
             }
         }
         lector.close();
