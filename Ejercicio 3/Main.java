@@ -13,120 +13,115 @@
  * Clase Main 
  *  
 */
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.lang.model.util.Elements;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import java.util.Random;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
-    	
-    	Scanner lector = new Scanner(System.in);
-        String filePath = "randomNumbers.txt"; 
+        Scanner lector = new Scanner(System.in);
+        String filePath = "randomNumbers.txt";
         boolean condition = true;
 
         // for count = 11 to 300
         int count = 3000;
         Generador.generateNumbers(filePath, count);
         System.out.println("Se han generado " + count + " números aleatorios en el archivo " + filePath);
-        
-        
+
         int[] numbers = new int[count];
         try (Scanner scanner = new Scanner(new File(filePath))) {
             for (int i = 0; i < count; i++) {
-                numbers[i] = scanner.nextInt(); 
+                numbers[i] = scanner.nextInt();
             }
         } catch (FileNotFoundException e) {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
-        
-       
-        
-        for(int i = 0; i < 3000; i += 11) {
-        	int remaining = 3000 - i;
-        	int blockToRead = Math.min(11, remaining);
-       
-        
 
         while (condition) {
+            System.out.println("Seleccione el algoritmo de ordenamiento que desea utilizar: ");
             System.out.println("1. Gnome Sort");
             System.out.println("2. Merge Sort");
             System.out.println("3. Quick Sort");
             System.out.println("4. Radix Sort");
             System.out.println("5. Insertion Sort");
-            System.out.println("Seleccione el algoritmo de ordenamiento que desea utilizar: ");
 
-            switch (lector.nextInt()) { 
-            case 1: 
-                for(int i = 11; i < numbers.length; i++) {
-                	int[] arr0 = numbers.clone();
-                    GnomeSort.gnomeSort(numbers);
-                    for(int j = 0; j< arr0.length; j++) {
-                    	System.out.println(arr0[j] + "");
-                    }
-       
-                }
-                break;
+            int option = lector.nextInt();
+            long[] times = new long[3000]; // Array para almacenar los tiempos de ejecución
 
-            case 2: 
-                for(int i = 11; i < numbers.length; i++) {
-                	int[] arr1 = numbers.clone();
-                    MergeSort.mergeSort(numbers);
-                    for(int j = 0; j< arr1.length; j++) {
-                    	System.out.println(arr1[j] + "");
+            switch (option) {
+                case 1:
+                    for (int i = 0; i < 3000; i++) {
+                        int[] arr0 = numbers.clone();
+                        long startTime = System.nanoTime();
+                        GnomeSort.gnomeSort(arr0);
+                        long endTime = System.nanoTime();
+                        times[i] = endTime - startTime;
                     }
-                }
-                break;
+                    printTimeTable("Gnome Sort", times);
+                    break;
 
-            case 3:
-                for(int i = 11 ; i < numbers.length; i++) {
-                	int[] arr2 = numbers.clone();
-                    QuickSort.quickSort(numbers, 0, numbers.length - 1);
-                    for(int j = 0; j< arr2.length; j++) {
-                    	System.out.println(arr2[j] + "");
+                case 2:
+                    for (int i = 0; i < 3000; i++) {
+                        int[] arr1 = numbers.clone();
+                        long startTime = System.nanoTime();
+                        MergeSort.mergeSort(arr1);
+                        long endTime = System.nanoTime();
+                        times[i] = endTime - startTime;
                     }
-                    //shuffleArray(numbers);
-                }
-                break;
+                    printTimeTable("Merge Sort", times);
+                    break;
 
-            case 4:
-                for(int i = 11; i < numbers.length; i++) {
-                	int[] arr3 = numbers.clone();
-                    RadixSort.radixSort(numbers, count);
-                    for(int j = 0; j< arr3.length; j++) {
-                    	System.out.println(arr3[j] + "");
+                case 3:
+                    for (int i = 0; i < 3000; i++) {
+                        int[] arr2 = numbers.clone();
+                        long startTime = System.nanoTime();
+                        QuickSort.quickSort(arr2, 0, arr2.length - 1);
+                        long endTime = System.nanoTime();
+                        times[i] = endTime - startTime;
                     }
-                    //shuffleArray(numbers);
-                }
-                break;
+                    printTimeTable("Quick Sort", times);
+                    break;
 
-            case 5:
-                for(int i = 11; i < numbers.length; i++) {
-                	int[] arr4 = numbers.clone();
-                    InsertionSort.insertionSort(numbers);
-                    for(int j = 0; j< arr4.length; j++) {
-                    	System.out.println(arr4[j] + "");
+                case 4:
+                    for (int i = 0; i < 3000; i++) {
+                        int[] arr3 = numbers.clone();
+                        long startTime = System.nanoTime();
+                        RadixSort.radixSort(arr3, count);
+                        long endTime = System.nanoTime();
+                        times[i] = endTime - startTime;
                     }
-                   // shuffleArray(numbers);
-                }
-                break;
+                    printTimeTable("Radix Sort", times);
+                    break;
+
+                case 5:
+                    for (int i = 0; i < 3000; i++) {
+                        int[] arr4 = numbers.clone();
+                        long startTime = System.nanoTime();
+                        InsertionSort.insertionSort(arr4);
+                        long endTime = System.nanoTime();
+                        times[i] = endTime - startTime;
+                    }
+                    printTimeTable("Insertion Sort", times);
+                    break;
             }
 
             System.out.println("Desea continuar? (1. Si, 2. No, 3. Imprimir números)");
-            if (lector.nextInt() == 2) {
+            int decision = lector.nextInt();
+            if (decision == 2) {
                 condition = false;
-            }
-            else if (lector.nextInt() == 1) {
+            } else if (decision == 1) {
                 condition = true;
                 shuffleArray(numbers);
-            }
-            else if (lector.nextInt() == 3) {
+            } else if (decision == 3) {
                 for (int i = 0; i < count; i++) {
                     System.out.println(numbers[i]);
                 }
@@ -143,6 +138,15 @@ public class Main {
             int a = array[index];
             array[index] = array[i];
             array[i] = a;
+        }
+    }
+
+    private static void printTimeTable(String algorithm, long[] times) {
+        System.out.println("Tiempo promedio para " + algorithm + ":");
+        System.out.println("Iteración | Tiempo (nanosegundos)");
+        System.out.println("----------------------------------");
+        for (int i = 0; i < times.length; i++) {
+            System.out.printf("%9d | %20d\n", i + 1, times[i]);
         }
     }
 }
